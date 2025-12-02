@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>San Francisco Map</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+</head>
+<body class="map-page">
+    <a class="floating-btn" href="gallery.html">Gallery</a>
+    <a class="floating-btn secondary" href="index.html">Main</a>
+    <div class="map-container">
+        <div id="map"></div>
+        <div class="map-cta">
+            <a href="https://www.openstreetmap.org/#map=12/37.77/-122.44" target="_blank" rel="noopener">View larger map</a>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const markerData = [
+                {
+                    link: 'photo-15.html',
+                    coords: [37.77672133871063, -122.38865747138708],
+                    img: 'images/15.jpg',
+                    alt: 'Photo near Mission Bay, San Francisco'
+                },
+                {
+                    link: 'photo-2.html',
+                    coords: [37.808611, -122.413611],
+                    img: 'images/2.jpg',
+                    alt: 'Photo near 37&deg;48&prime;31&Prime;N 122&deg;24&prime;49&Prime;W, San Francisco'
+                },
+                {
+                    link: 'photo-5.html',
+                    coords: [37.794, -122.4083],
+                    img: 'images/5.jpg',
+                    alt: 'Willie "Woo Woo" Wong Playground, 830 Sacramento Street'
+                },
+                {
+                    link: 'photo-6.html',
+                    coords: [37.7142, -122.4508],
+                    img: 'images/6.jpg',
+                    alt: '206-230 Lawrence Ave, San Francisco, CA 94112'
+                },
+                {
+                    link: 'photo-8.html',
+                    coords: [37.701182958696194, -122.4155777096311],
+                    img: 'images/8.jpg',
+                    alt: 'Image 8 near Visitacion Valley'
+                },
+                {
+                    link: 'photo-9.html',
+                    coords: [37.79667917129156, -122.48229412392052],
+                    img: 'images/9.jpg',
+                    alt: 'Image 9 overlooking Sea Cliff'
+                },
+                {
+                    link: 'photo-12.html',
+                    coords: [37.80932859869749, -122.46975604622067],
+                    img: 'images/12.jpg',
+                    alt: 'Image 12 around the Presidio shoreline'
+                },
+                {
+                    link: 'photo-11.html',
+                    coords: [37.81817868326633, -122.3526584722933],
+                    img: 'images/11.jpg',
+                    alt: 'Image 11 near Treasure Island waterfront'
+                },
+                {
+                    link: 'photo-14.html',
+                    coords: [37.75498503493911, -122.4466224617978],
+                    img: 'images/14.jpg',
+                    alt: 'Image 14 near Twin Peaks neighborhood'
+                },
+                {
+                    link: 'photo-16.html',
+                    coords: [37.734841458146285, -122.45879015928624],
+                    img: 'images/16.jpg',
+                    alt: 'Image 16 near Glen Park hills'
+                },
+                {
+                    link: 'photo-3.html',
+                    coords: [21.28388378597232, -157.83879439974362],
+                    img: 'images/3.jpg',
+                    alt: 'Image 3 in Honolulu, Hawaii'
+                },
+                {
+                    link: 'photo-4.html',
+                    coords: [37.70666028888972, -120.41061279511419],
+                    img: 'images/4.jpg',
+                    alt: 'Image 4 near Central Valley, California'
+                },
+                {
+                    link: 'photo-18.html',
+                    coords: [37.785853837179225, -122.40123319310848],
+                    img: 'images/18.jpg',
+                    alt: 'Image 18 in downtown San Francisco'
+                }
+            ];
+
+            const map = L.map('map', {
+                scrollWheelZoom: true
+            }).setView(markerData[0].coords, 13);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            markerData.forEach(({ coords, img, alt, link }) => {
+                const photoIcon = L.divIcon({
+                    className: 'photo-marker',
+                    html: `
+                        <a href="${link}" aria-label="View full photo">
+                            <img src="${img}" alt="${alt}">
+                        </a>
+                    `,
+                    iconSize: [60, 70],
+                    iconAnchor: [30, 35]
+                });
+
+                L.marker(coords, { icon: photoIcon, keyboard: false }).addTo(map);
+            });
+        });
+    </script>
+</body>
+</html>

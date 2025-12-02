@@ -1,0 +1,361 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+@font-face {
+  font-family: "HigherJump";
+  src: url("font/higher-jump.regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  background: #f2f2f2;
+  font-family: Arial, sans-serif;
+  padding: 20px;
+
+  background-image: url("images/17.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+body.map-page {
+  padding: 0;
+  background: #fff;
+  background-image: none;
+}
+
+.floating-btn {
+  position: fixed;
+  top: 50%;
+  left: 24px;
+  background: transparent;
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  padding: 14px 22px;
+  border-radius: 999px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  box-shadow: none;
+  transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  z-index: 100;
+  transform: translateY(-50%);
+}
+
+.floating-btn:hover,
+.floating-btn:focus-visible {
+  transform: translateY(-50%) scale(1.15);
+  color: #fff;
+  border-color: #fff;
+}
+
+.floating-btn.secondary {
+  top: calc(50% + 80px);
+  left: 24px;
+  background: transparent;
+}
+
+.floating-btn.secondary:hover,
+.floating-btn.secondary:focus-visible {
+  border-color: #fff;
+  transform: translateY(-50%) scale(1.15);
+}
+
+.gallery-page .floating-btn {
+  background: rgba(0, 0, 0, 0.6);
+  border-color: rgba(255, 255, 255, 0.85);
+  color: #fff;
+  backdrop-filter: blur(6px);
+}
+
+.gallery-page .floating-btn:hover,
+.gallery-page .floating-btn:focus-visible {
+  border-color: #fff;
+}
+
+.banner {
+  background: rgba(255, 255, 255, 0.9);
+  color: #333;
+  padding: 24px 16px;
+  text-align: center;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-weight: 700;
+  border-bottom: 3px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.banner h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.banner p {
+  margin: 6px 0 0;
+  font-size: 14px;
+  letter-spacing: 0;
+  color: #555;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr)); /* lock to 4 columns */
+  gap: 30px;
+  justify-items: center;
+  padding: 20px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.polaroid-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.polaroid-link:focus-visible .polaroid {
+  outline: 3px solid rgba(255, 255, 255, 0.8);
+  outline-offset: 4px;
+}
+
+.polaroid {
+  background: white;
+  width: 100%;
+  max-width: 260px;
+  padding: 15px 15px 40px 15px; /* bottom padding for the caption space */
+  box-shadow: 0px 8px 18px rgba(0,0,0,0.15);
+  border-radius: 5px;
+  text-align: center;
+  transform: rotate(-2deg);
+  transition: transform 0.2s;
+}
+
+.polaroid:hover {
+  transform: rotate(0deg) scale(1.03);
+}
+
+.polaroid img {
+  width: 100%;
+  border-radius: 3px;
+}
+
+.caption {
+  margin-top: 15px;
+  font-size: 14px;
+  font-family: "HigherJump", "Trebuchet MS", sans-serif;
+  letter-spacing: 0.5px;
+  text-align: center;
+}
+
+.detail-caption {
+  text-align: center;
+}
+
+.map-container {
+  position: relative;
+  width: 100%;
+  height: 100vh; /* full viewport height */
+}
+
+#map {
+  width: 100%;
+  height: 100%;
+}
+
+.map-cta {
+  position: absolute;
+  bottom: 8px;
+  right: 12px;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.photo-marker {
+  background: transparent;
+  border: none;
+  text-align: center;
+}
+
+.photo-marker a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+.photo-marker img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border: 2px solid #fff;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.photo-marker a:hover img,
+.photo-marker a:focus-visible img {
+  transform: scale(1.4);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
+}
+
+body:not(.map-page) .banner {
+  margin: -20px -20px 20px; /* offset body padding so banner spans full width */
+}
+
+body.photo-detail {
+  min-height: 100vh;
+  padding: 0;
+  background-color: #000;
+  background-image: var(--detail-bg, none);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+}
+
+body.photo-detail::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 0;
+}
+
+.detail-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 16px 60px;
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.detail-polaroid {
+  background: #fff;
+  color: #333;
+  width: min(90%, 420px);
+  padding: 28px 28px 40px;
+  border-radius: 6px;
+  box-shadow: 0 35px 70px rgba(0, 0, 0, 0.35);
+  transform: rotate(-2deg);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.detail-polaroid img {
+  width: 100%;
+  border-radius: 4px;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+.detail-caption {
+  min-height: 80px;
+  border-radius: 4px;
+  padding: 12px 14px;
+  font-size: 14px;
+  text-align: left;
+  background: #fff;
+  border: none;
+  box-shadow: none;
+  font-family: "HigherJump", "Trebuchet MS", sans-serif;
+  font-size: 18px;
+  letter-spacing: 0.5px;
+}
+
+.cover-page {
+  min-height: 100vh;
+  margin: 0;
+  background: #000;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+  text-align: center;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+}
+
+.cover-overlay {
+  max-width: 640px;
+  width: 100%;
+}
+
+.cover-page h1 {
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+.cover-page p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 32px;
+}
+
+.cover-instructions {
+  max-width: 600px;
+  margin: 0 auto 40px;
+}
+
+.cover-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 14px 28px;
+  border: 2px solid #fff;
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-radius: 999px;
+  transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.cover-cta:hover,
+.cover-cta:focus-visible {
+  transform: scale(1.1);
+  border-color: rgba(255, 255, 255, 0.85);
+  color: #fff;
+}
+
+.flashing {
+  animation: coverPulse 1.2s ease-in-out infinite;
+}
+
+@keyframes coverPulse {
+  0% {
+    opacity: 1;
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.45);
+  }
+  50% {
+    opacity: 0.5;
+    box-shadow: 0 0 18px rgba(255, 255, 255, 0.9);
+  }
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.45);
+  }
+}
