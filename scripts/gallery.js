@@ -26,6 +26,7 @@
     let moved = false;
     let startX = 0;
     let startY = 0;
+    let activePointerId = null;
 
     function onPointerDown(e) {
       isDragging = true;
@@ -40,6 +41,10 @@
       polaroid.style.transition = 'none';
       zCounter += 1;
       card.style.zIndex = zCounter;
+      activePointerId = e.pointerId;
+      if (polaroid.setPointerCapture) {
+        polaroid.setPointerCapture(activePointerId);
+      }
       if (galleryBg) {
         const img = polaroid.querySelector('img');
         if (img && img.src) {
@@ -53,7 +58,7 @@
     }
 
     function onPointerMove(e) {
-      if (!isDragging) return;
+      if (!isDragging || (activePointerId !== null && e.pointerId !== activePointerId)) return;
       const deltaX = Math.abs(e.clientX - startX);
       const deltaY = Math.abs(e.clientY - startY);
       if (deltaX > 3 || deltaY > 3) moved = true;
@@ -65,13 +70,18 @@
       card.style.transform = `translate(0, 0)`;
     }
 
-    function onPointerUp() {
+    function onPointerUp(e) {
+      if (activePointerId !== null && e.pointerId !== activePointerId) return;
       isDragging = false;
       polaroid.style.cursor = 'grab';
       polaroid.style.filter = '';
       polaroid.style.transition = '';
       document.removeEventListener('pointermove', onPointerMove);
       document.removeEventListener('pointerup', onPointerUp);
+      if (polaroid.releasePointerCapture && activePointerId !== null) {
+        polaroid.releasePointerCapture(activePointerId);
+      }
+      activePointerId = null;
       if (moved) {
         card.dataset.wasDragging = 'true';
         setTimeout(() => delete card.dataset.wasDragging, 0);
