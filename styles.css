@@ -25,8 +25,63 @@ body {
 
 body.map-page {
   padding: 0;
-  background: #fff;
+  background: #0a0a0a;
   background-image: none;
+}
+
+.map-container,
+#map {
+  background: #0a0a0a;
+}
+
+.gallery-page {
+  min-height: 100vh;
+  padding: 32px 24px 60px;
+  background: #020202;
+  color: #f5f5f5;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.gallery-page::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 22% 18%, rgba(255, 255, 255, 0.08), transparent 28%),
+    radial-gradient(circle at 80% 12%, rgba(255, 255, 255, 0.06), transparent 26%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+  opacity: 0.95;
+  z-index: -2;
+}
+
+.gallery-bg {
+  position: fixed;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: blur(16px) brightness(0.45);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.deck-prompt {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: #f5f5f5;
+  padding: 12px 20px;
+  border-radius: 0;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  z-index: 250;
+  pointer-events: none;
+  text-shadow: 0 6px 22px rgba(0, 0, 0, 0.45);
 }
 
 .floating-btn {
@@ -44,7 +99,7 @@ body.map-page {
   text-transform: uppercase;
   box-shadow: none;
   transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease;
-  z-index: 100;
+  z-index: 200;
   transform: translateY(-50%);
 }
 
@@ -72,6 +127,7 @@ body.map-page {
   border-color: rgba(255, 255, 255, 0.85);
   color: #fff;
   backdrop-filter: blur(6px);
+  z-index: 200;
 }
 
 .gallery-page .floating-btn:hover,
@@ -79,38 +135,66 @@ body.map-page {
   border-color: #fff;
 }
 
-.banner {
-  background: rgba(255, 255, 255, 0.9);
-  color: #333;
-  padding: 24px 16px;
+.gallery-intro {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  z-index: 10;
+  padding: 24px;
+  transition: opacity 1.2s ease;
+}
+
+.gallery-intro.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.map-page .gallery-intro.passive {
+  pointer-events: none;
+}
+
+.intro-card {
+  max-width: 520px;
+  width: 100%;
+  background: rgba(10, 10, 10, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 16px;
+  padding: 32px 28px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+  color: #f5f5f5;
   text-align: center;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  font-weight: 700;
-  border-bottom: 3px solid rgba(0, 0, 0, 0.1);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 
-.banner h1 {
-  margin: 0;
-  font-size: 24px;
+.intro-card h1 {
+  margin: 0 0 12px;
+  font-size: clamp(1.75rem, 3vw, 2.4rem);
 }
 
-.banner p {
-  margin: 6px 0 0;
-  font-size: 14px;
-  letter-spacing: 0;
-  color: #555;
-}
 
 .gallery {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr)); /* lock to 4 columns */
-  gap: 30px;
-  justify-items: center;
-  padding: 20px;
+  position: relative;
+  z-index: 1;
   width: 100%;
-  margin: 0 auto;
+  min-height: calc(100vh - 80px);
+}
+
+.gallery .polaroid-link {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-2deg);
+}
+
+.gallery .polaroid-link:nth-child(odd) .polaroid {
+  transform: rotate(-4deg);
+}
+
+.gallery .polaroid-link:nth-child(even) .polaroid {
+  transform: rotate(3deg);
 }
 
 .polaroid-link {
@@ -133,11 +217,15 @@ body.map-page {
   border-radius: 5px;
   text-align: center;
   transform: rotate(-2deg);
-  transition: transform 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
+  cursor: grab;
+  user-select: none;
+  color: #0d0d0d;
 }
 
 .polaroid:hover {
   transform: rotate(0deg) scale(1.03);
+  box-shadow: 0 16px 32px rgba(0,0,0,0.35);
 }
 
 .polaroid img {
@@ -151,6 +239,7 @@ body.map-page {
   font-family: "HigherJump", "Trebuchet MS", sans-serif;
   letter-spacing: 0.5px;
   text-align: center;
+  color: #0d0d0d;
 }
 
 .detail-caption {

@@ -6,8 +6,6 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 </head>
 <body class="map-page">
-    <a class="floating-btn" href="gallery.html">Gallery</a>
-    <a class="floating-btn secondary" href="index.html">Main</a>
     <div class="map-container">
         <div id="map"></div>
         <div class="map-cta">
@@ -92,10 +90,28 @@
                     alt: 'Image 4 near Central Valley, California'
                 },
                 {
-                    link: 'photo-18.html',
-                    coords: [37.785853837179225, -122.40123319310848],
-                    img: 'images/18.jpg',
-                    alt: 'Image 18 in downtown San Francisco'
+                    link: 'photo-19.html',
+                    coords: [37.50178040403151, -122.38461155694819],
+                    img: 'images/19.jpg',
+                    alt: 'Image 19 near Redwood Shores'
+                },
+                {
+                    link: 'photo-20.html',
+                    coords: [37.495078684264676, -122.26155070492302],
+                    img: 'images/20.jpg',
+                    alt: 'Image 20 near San Mateo Bridge approach'
+                },
+                {
+                    link: 'photo-21.html',
+                    coords: [37.7681227731993, -122.38873313679984],
+                    img: 'images/21.jpg',
+                    alt: 'Image 21 in Mission Bay'
+                },
+                {
+                    link: 'photo-22.html',
+                    coords: [37.7878884168802, -122.40777600496509],
+                    img: 'images/22.jpg',
+                    alt: 'Image 22 near Union Square'
                 }
             ];
 
@@ -103,8 +119,8 @@
                 scrollWheelZoom: true
             }).setView(markerData[0].coords, 13);
 
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href=\"https://carto.com/attributions\">CARTO</a>'
             }).addTo(map);
 
             markerData.forEach(({ coords, img, alt, link }) => {
