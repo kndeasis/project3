@@ -141,6 +141,11 @@ body.map-page {
   overscroll-behavior: contain;
 }
 
+.deck-root {
+  touch-action: none;
+  overflow: hidden;
+}
+
 .deck-page .gallery {
   touch-action: none;
 }
