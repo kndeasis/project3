@@ -138,6 +138,11 @@ body.map-page {
 .deck-page {
   touch-action: none; /* disable zoom gestures so drag works on mobile */
   overflow: hidden;
+  overscroll-behavior: contain;
+}
+
+.deck-page .gallery {
+  touch-action: none;
 }
 
 .gallery-intro {
