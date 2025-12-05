@@ -135,6 +135,11 @@ body.map-page {
   border-color: #fff;
 }
 
+.deck-page {
+  touch-action: none; /* disable zoom gestures so drag works on mobile */
+  overflow: hidden;
+}
+
 .gallery-intro {
   position: fixed;
   inset: 0;
