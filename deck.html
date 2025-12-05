@@ -3,12 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Polaroid Deck Grid</title>
+  <title>Polaroid Deck</title>
   <link rel="stylesheet" href="styles.css">
 </head>
-<body class="gallery-page grid-page">
+<body class="gallery-page">
   <a class="floating-btn" href="homepage.html">Map</a>
-  <a class="floating-btn secondary" href="deck.html">Deck</a>
+  <a class="floating-btn secondary" href="gallery.html">Gallery View</a>
+  <div class="deck-prompt flashing" id="deckPrompt">shuffle through the deck or press 'gallery view'</div>
+  <div class="gallery-bg" id="galleryBg" aria-hidden="true"></div>
   <div class="gallery">
 
     <a class="polaroid-link" href="photo-15.html">
@@ -123,6 +125,8 @@
       </div>
     </a>
 
+
   </div>
+  <script src="scripts/gallery.js"></script>
 </body>
 </html>

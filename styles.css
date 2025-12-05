@@ -189,6 +189,23 @@ body.map-page {
   transform: translate(-50%, -50%) rotate(-2deg);
 }
 
+.grid-page .gallery {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+  padding: 32px 16px 60px;
+  min-height: auto;
+}
+
+.grid-page .gallery .polaroid-link {
+  position: static;
+  transform: rotate(-2deg);
+}
+
+.grid-page .gallery .polaroid {
+  transform: rotate(-2deg);
+}
+
 .gallery .polaroid-link:nth-child(odd) .polaroid {
   transform: rotate(-4deg);
 }
